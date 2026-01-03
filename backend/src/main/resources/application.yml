@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: splitwise-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/splitwise
+    username: splitwise
+    password: splitwise
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: users
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    schemas: users
+    locations: classpath:db/migration
+
+server:
+  port: 8080
+
+jwt:
+  secret: c3BsaXR3aXNlLWp3dC1zZWNyZXQta2V5LWNoYW5nZS1pbi1wcm9kdWN0aW9uLW11c3QtYmUtYXQtbGVhc3QtMjU2LWJpdHM=
+  expiration: 86400000 # 24 hours in milliseconds
+
