@@ -1,0 +1,7 @@
+# Docker volumes
+postgres_data/
+
+# Environment overrides
+.env
+.env.local
+
