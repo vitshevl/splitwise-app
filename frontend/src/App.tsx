@@ -6,6 +6,8 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Activities from './pages/Activities';
 import Journal from './pages/Journal';
+import Training from './pages/Training';
+import Analytics from './pages/Analytics';
 
 export default function App() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -54,6 +56,8 @@ export default function App() {
         <Route path="/" element={<Profile />} />
         <Route path="/activities" element={<Activities />} />
         <Route path="/journal" element={<Journal />} />
+        <Route path="/training" element={<Training />} />
+        <Route path="/analytics" element={<Analytics />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

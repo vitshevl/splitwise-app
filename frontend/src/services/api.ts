@@ -1,6 +1,7 @@
 import type { AuthResponse, LoginRequest, RegisterRequest, User } from '../types/auth';
 import type { Activity, ActivityStats, PageResponse } from '../types/activity';
 import type { DailyLog, DailyLogRequest, Meal, MealRequest, Workout, WorkoutRequest } from '../types/journal';
+import type { TrainingTask, TrainingTaskRequest } from '../types/training';
 
 const API_BASE = '/api';
 
@@ -136,6 +137,41 @@ export const journalApi = {
       method: 'POST',
       body: JSON.stringify({ amountMl }),
     }),
+};
+
+export const trainingApi = {
+  getTasks: (page = 0, size = 50): Promise<PageResponse<TrainingTask>> =>
+    request(`/training-tasks?page=${page}&size=${size}`),
+
+  getTask: (id: number): Promise<TrainingTask> =>
+    request(`/training-tasks/${id}`),
+
+  getTasksByDate: (date: string): Promise<TrainingTask[]> =>
+    request(`/training-tasks/date/${date}`),
+
+  getTasksByDateRange: (startDate: string, endDate: string): Promise<TrainingTask[]> =>
+    request(`/training-tasks/range?startDate=${startDate}&endDate=${endDate}`),
+
+  getPendingTasks: (): Promise<TrainingTask[]> =>
+    request('/training-tasks/pending'),
+
+  createTask: (data: TrainingTaskRequest): Promise<TrainingTask> =>
+    request('/training-tasks', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  updateTask: (id: number, data: TrainingTaskRequest): Promise<TrainingTask> =>
+    request(`/training-tasks/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+
+  toggleComplete: (id: number): Promise<TrainingTask> =>
+    request(`/training-tasks/${id}/toggle`, { method: 'PATCH' }),
+
+  deleteTask: (id: number): Promise<void> =>
+    request(`/training-tasks/${id}`, { method: 'DELETE' }),
 };
 
 export { ApiError };
