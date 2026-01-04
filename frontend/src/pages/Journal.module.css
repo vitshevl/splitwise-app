@@ -1,0 +1,498 @@
+.container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1.5rem;
+  min-height: calc(100vh - 128px);
+}
+
+.sidebar {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 128px);
+}
+
+.sidebarHeader {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebarHeader h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.addBtn {
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.addBtn:hover {
+  background: var(--accent-hover);
+}
+
+.addBtn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.logsList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.logItem {
+  width: 100%;
+  padding: 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.logItem:hover {
+  background: var(--bg-secondary);
+}
+
+.logItem.active {
+  background: rgba(252, 76, 2, 0.1);
+}
+
+.logDate {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.logPreview {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.emptyList {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.main {
+  min-width: 0;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  gap: 1rem;
+  color: var(--text-secondary);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.empty {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 4rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emptyIcon {
+  width: 64px;
+  height: 64px;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+}
+
+.emptyIcon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.empty h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.empty p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.createBtn {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.createBtn:hover {
+  background: var(--accent-hover);
+}
+
+/* Detail View */
+.detail {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.detailHeader h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.editBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.editBtn:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.editBtn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metricCard {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.metricCard.positive {
+  background: rgba(48, 209, 88, 0.1);
+}
+
+.metricCard.positive .metricValue {
+  color: var(--success);
+}
+
+.metricCard.negative {
+  background: rgba(255, 69, 58, 0.1);
+}
+
+.metricCard.negative .metricValue {
+  color: var(--error);
+}
+
+.metricValue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.metricUnit {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.metricLabel {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.notesSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.noteCard {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.noteCard h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.noteCard p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+}
+
+.section h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.mealsList, .workoutsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mealCard, .workoutCard {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.mealHeader, .workoutHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.mealType, .workoutType {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.mealTime, .workoutTime {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.mealDesc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.macros, .workoutStats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.workoutNotes {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.workoutAnalysis {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+/* Form */
+.form {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.formHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.formHeader h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.formSection {
+  margin-bottom: 1.5rem;
+}
+
+.formSection h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.field label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.field input, .field textarea {
+  padding: 0.625rem 0.875rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease;
+}
+
+.field input:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.field input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.cancelBtn {
+  padding: 0.625rem 1.25rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.cancelBtn:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.submitBtn {
+  padding: 0.625rem 1.25rem;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.submitBtn:hover {
+  background: var(--accent-hover);
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar {
+    max-height: 300px;
+  }
+}
+

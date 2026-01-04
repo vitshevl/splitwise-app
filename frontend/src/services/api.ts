@@ -1,4 +1,6 @@
 import type { AuthResponse, LoginRequest, RegisterRequest, User } from '../types/auth';
+import type { Activity, ActivityStats, PageResponse } from '../types/activity';
+import type { DailyLog, DailyLogRequest, Meal, MealRequest, Workout, WorkoutRequest } from '../types/journal';
 
 const API_BASE = '/api';
 
@@ -34,6 +36,10 @@ async function request<T>(
     throw new ApiError(response.status, message || 'Request failed');
   }
 
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
   return response.json();
 }
 
@@ -53,5 +59,83 @@ export const authApi = {
   me: (): Promise<User> => request('/auth/me'),
 };
 
-export { ApiError };
+export const activitiesApi = {
+  getActivities: (page = 0, size = 20, type?: string): Promise<PageResponse<Activity>> => {
+    const params = new URLSearchParams({ page: String(page), size: String(size) });
+    if (type) params.append('type', type);
+    return request(`/activities?${params}`);
+  },
 
+  getActivity: (id: number): Promise<Activity> =>
+    request(`/activities/${id}`),
+
+  getStats: (): Promise<ActivityStats> =>
+    request('/activities/stats'),
+};
+
+export const journalApi = {
+  getDailyLogs: (page = 0, size = 20): Promise<PageResponse<DailyLog>> =>
+    request(`/daily-logs?page=${page}&size=${size}`),
+
+  getDailyLog: (id: number): Promise<DailyLog> =>
+    request(`/daily-logs/${id}`),
+
+  getDailyLogByDate: (date: string): Promise<DailyLog> =>
+    request(`/daily-logs/date/${date}`),
+
+  createDailyLog: (data: DailyLogRequest): Promise<DailyLog> =>
+    request('/daily-logs', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  updateDailyLog: (id: number, data: DailyLogRequest): Promise<DailyLog> =>
+    request(`/daily-logs/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+
+  deleteDailyLog: (id: number): Promise<void> =>
+    request(`/daily-logs/${id}`, { method: 'DELETE' }),
+
+  // Meals
+  addMeal: (logId: number, data: MealRequest): Promise<Meal> =>
+    request(`/daily-logs/${logId}/meals`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  updateMeal: (logId: number, mealId: number, data: MealRequest): Promise<Meal> =>
+    request(`/daily-logs/${logId}/meals/${mealId}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+
+  deleteMeal: (logId: number, mealId: number): Promise<void> =>
+    request(`/daily-logs/${logId}/meals/${mealId}`, { method: 'DELETE' }),
+
+  // Workouts
+  addWorkout: (logId: number, data: WorkoutRequest): Promise<Workout> =>
+    request(`/daily-logs/${logId}/workouts`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  updateWorkout: (logId: number, workoutId: number, data: WorkoutRequest): Promise<Workout> =>
+    request(`/daily-logs/${logId}/workouts/${workoutId}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+
+  deleteWorkout: (logId: number, workoutId: number): Promise<void> =>
+    request(`/daily-logs/${logId}/workouts/${workoutId}`, { method: 'DELETE' }),
+
+  // Water
+  addWater: (logId: number, amountMl: number): Promise<void> =>
+    request(`/daily-logs/${logId}/water`, {
+      method: 'POST',
+      body: JSON.stringify({ amountMl }),
+    }),
+};
+
+export { ApiError };

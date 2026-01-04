@@ -19,7 +19,7 @@ spring:
 
   flyway:
     enabled: true
-    schemas: users
+    schemas: users,strava_data,daily_activities_log
     locations: classpath:db/migration
 
 server:

@@ -1,9 +1,11 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
+import Layout from './components/Layout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import Activities from './pages/Activities';
+import Journal from './pages/Journal';
 
 export default function App() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -44,16 +46,17 @@ export default function App() {
         path="/register"
         element={isAuthenticated ? <Navigate to="/" replace /> : <Register />}
       />
+      
+      {/* Protected routes with Layout */}
       <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-        }
-      />
+        element={isAuthenticated ? <Layout /> : <Navigate to="/login" replace />}
+      >
+        <Route path="/" element={<Profile />} />
+        <Route path="/activities" element={<Activities />} />
+        <Route path="/journal" element={<Journal />} />
+      </Route>
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
-
