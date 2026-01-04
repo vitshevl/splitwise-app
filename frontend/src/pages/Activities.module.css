@@ -4,57 +4,239 @@
   gap: 1.5rem;
 }
 
-.header h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  letter-spacing: -0.02em;
+/* Type Filters */
+.typeFilters {
+  display: flex;
+  gap: 0.75rem;
 }
 
-.header p {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-}
-
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-
-.statCard {
+.typeButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
+  border-radius: 50px;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.statValue {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1.5rem;
-  font-weight: 600;
+.typeButton:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.typeButton.active {
+  background: transparent;
+  border-color: var(--accent);
   color: var(--accent);
 }
 
-.statLabel {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.typeIcon {
+  width: 20px;
+  height: 20px;
 }
 
-.loading {
+/* Week Summary */
+.weekSummary {
+  padding: 1.5rem 0;
+}
+
+.weekSummary h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.weekStats {
+  display: flex;
+  gap: 3rem;
+}
+
+.weekStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.weekStatLabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.weekStatValue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.weekStatValue .unit {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Chart */
+.chartSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chartHeader h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.periodSelector {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--bg-secondary);
+  padding: 0.25rem;
+  border-radius: 8px;
+}
+
+.periodBtn {
+  padding: 0.375rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.periodBtn:hover {
+  color: var(--text-secondary);
+}
+
+.periodBtn.active {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.chartContainer {
+  display: flex;
+  gap: 1rem;
+  height: 180px;
+}
+
+.chartYAxis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5rem 0 1.5rem 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  min-width: 50px;
+  text-align: right;
+}
+
+.chart {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  position: relative;
+  padding-bottom: 1.5rem;
+  border-left: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.chartColumn {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+  position: relative;
+}
+
+.chartBarContainer {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.chartBar {
+  width: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+  opacity: 0.3;
+  transition: height 0.3s ease;
+}
+
+.chartBar.current {
+  opacity: 1;
+  width: 6px;
+}
+
+.chartDot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  transform: translate(-50%, 50%);
+  left: 50%;
+  box-shadow: 0 0 0 3px rgba(252, 76, 2, 0.2);
+}
+
+.chartValue {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.chartMonth {
+  position: absolute;
+  bottom: -1.25rem;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.chartLine {
+  position: absolute;
+  inset: 0;
+  bottom: 1.5rem;
+  pointer-events: none;
+}
+
+/* Loading */
+.loading {
+  display: flex;
   justify-content: center;
-  padding: 4rem 2rem;
-  gap: 1rem;
-  color: var(--text-secondary);
+  padding: 3rem;
 }
 
 .spinner {
@@ -71,45 +253,12 @@
 }
 
 .empty {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 4rem 2rem;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.emptyIcon {
-  width: 64px;
-  height: 64px;
-  background: var(--bg-secondary);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
+  padding: 3rem;
   color: var(--text-muted);
 }
 
-.emptyIcon svg {
-  width: 32px;
-  height: 32px;
-}
-
-.empty h2 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.empty p {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  max-width: 400px;
-}
-
+/* Activities List */
 .activitiesList {
   display: flex;
   flex-direction: column;
@@ -130,45 +279,25 @@
 
 .activityHeader {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 1rem;
 }
 
-.activityIcon {
-  width: 40px;
-  height: 40px;
-  background: rgba(252, 76, 2, 0.1);
-  border-radius: 10px;
+.activityMeta {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  flex-shrink: 0;
-}
-
-.activityIcon svg {
-  width: 20px;
-  height: 20px;
-}
-
-.activityInfo {
-  flex: 1;
-  min-width: 0;
-}
-
-.activityInfo h3 {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  margin-bottom: 0.125rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .activityDate {
   font-size: 0.75rem;
   color: var(--text-muted);
+}
+
+.activityName {
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .activityType {
@@ -177,15 +306,13 @@
   letter-spacing: 0.05em;
   color: var(--text-muted);
   background: var(--bg-secondary);
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.625rem;
   border-radius: 4px;
 }
 
 .activityStats {
   display: flex;
-  gap: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
+  gap: 2rem;
   flex-wrap: wrap;
 }
 
@@ -197,8 +324,8 @@
 
 .activityStatValue {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.9375rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .activityStatLabel {
@@ -208,6 +335,7 @@
   letter-spacing: 0.03em;
 }
 
+/* Pagination */
 .pagination {
   display: flex;
   align-items: center;
@@ -242,13 +370,20 @@
   color: var(--text-muted);
 }
 
-@media (max-width: 640px) {
-  .statsGrid {
-    grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  .typeFilters {
+    flex-wrap: wrap;
+  }
+  
+  .weekStats {
+    gap: 1.5rem;
+  }
+  
+  .weekStatValue {
+    font-size: 1.25rem;
   }
   
   .activityStats {
     gap: 1rem;
   }
 }
-
